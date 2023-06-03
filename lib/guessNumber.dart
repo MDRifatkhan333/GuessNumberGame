@@ -28,11 +28,22 @@ class _GuessNumberState extends State<GuessNumber> {
 
     setState(
       () {
-        if (textFieldValue == null || textFieldValue == RandomNumber) {
-          _guessNumber = 'You guessed right!';
-          print(_guessNumber);
+        if (textFieldValue == null) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
+              backgroundColor: Colors.red,
+              content: Text(
+                'Please enter a number',
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+              ),
+            ),
+          );
+        } else if (textFieldValue == RandomNumber) {
+          _guessNumber = 'You guessed right!';
+
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              backgroundColor: Colors.green,
               content: Text('You guessed right!'),
             ),
           );
@@ -78,7 +89,7 @@ class _GuessNumberState extends State<GuessNumber> {
               const SizedBox(height: 20.0),
               ElevatedButton(
                 onPressed: _checkGuessNumber,
-                child: const Text('Check'),
+                child: const Text('Check Guess Number'),
               ),
             ]),
           ),
